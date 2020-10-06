@@ -4,7 +4,7 @@ const person = (props) => {
     return (
         <div>
             <p>
-                I am a {props.name} and my age is {props.age}
+                My name is {props.name} and I am {props.age} years old
             </p>
             <p>{props.children}</p>
         </div>
