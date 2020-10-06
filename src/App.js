@@ -13,26 +13,36 @@ class App extends Component {
         showPersons: false,
     };
 
-    switchNameHandler = (newName) => {
-        // console.log("was clicked");
-        // this.state.persons[0].name = "Obydullah Sarder";  // DON"T DO THIS
-        this.setState({
-            persons: [
-                { id: 1, name: newName, age: 26 },
-                { id: 2, name: "Masuma", age: 18 },
-                { id: 3, name: "Mamun", age: 27 },
-            ],
-        });
-    };
+    // switchNameHandler = (newName) => {
+    //     // console.log("was clicked");
+    //     // this.state.persons[0].name = "Obydullah Sarder";  // DON"T DO THIS
+    //     this.setState({
+    //         persons: [
+    //             { id: 1, name: newName, age: 26 },
+    //             { id: 2, name: "Masuma", age: 18 },
+    //             { id: 3, name: "Mamun", age: 27 },
+    //         ],
+    //     });
+    // };
 
-    nameChangedHandler = (event) => {
-        this.setState({
-            persons: [
-                { id: 1, name: "Shishir", age: 24 },
-                { id: 2, name: event.target.value, age: 18 },
-                { id: 3, name: "Mamun", age: 26 },
-            ],
+    nameChangedHandler = (event, id) => {
+        const personIndex = this.state.persons.findIndex((p) => {
+            return p.id === id;
         });
+
+        const person = { ...this.state.persons[personIndex] }; // make a copy
+
+        // const person = Object.assign({}, this.state.persons[personIndex]); // equivalent to the previous one
+
+        person.name = event.target.value;
+
+        const persons = [...this.state.persons]; // make a copy
+
+        // const persons = this.state.persons.slice(); // equivalent to the previous one
+
+        persons[personIndex] = person;
+
+        this.setState({ persons: persons });
     };
 
     togglePersonHandler = () => {
@@ -67,10 +77,10 @@ class App extends Component {
                                 name={person.name}
                                 age={person.age}
                                 key={person.id}
-                                click={this.deletePersonHandler.bind(
-                                    this,
-                                    index
-                                )}
+                                click={() => this.deletePersonHandler(index)}
+                                changed={(event) =>
+                                    this.nameChangedHandler(event, person.id)
+                                }
                             >
                                 My Hobby is Sleeping
                             </Person>
