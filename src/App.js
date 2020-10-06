@@ -5,9 +5,9 @@ import Person from "./Person/Person";
 class App extends Component {
     state = {
         persons: [
-            { name: "Shishir", age: 24 },
-            { name: "Masuma", age: 18 },
-            { name: "Mamun", age: 26 },
+            { id: 1, name: "Shishir", age: 24 },
+            { id: 2, name: "Masuma", age: 18 },
+            { id: 3, name: "Mamun", age: 26 },
         ],
         otherState: "some other value",
         showPersons: false,
@@ -18,9 +18,9 @@ class App extends Component {
         // this.state.persons[0].name = "Obydullah Sarder";  // DON"T DO THIS
         this.setState({
             persons: [
-                { name: newName, age: 26 },
-                { name: "Masuma", age: 18 },
-                { name: "Mamun", age: 27 },
+                { id: 1, name: newName, age: 26 },
+                { id: 2, name: "Masuma", age: 18 },
+                { id: 3, name: "Mamun", age: 27 },
             ],
         });
     };
@@ -28,9 +28,9 @@ class App extends Component {
     nameChangedHandler = (event) => {
         this.setState({
             persons: [
-                { name: "Shishir", age: 24 },
-                { name: event.target.value, age: 18 },
-                { name: "Mamun", age: 26 },
+                { id: 1, name: "Shishir", age: 24 },
+                { id: 2, name: event.target.value, age: 18 },
+                { id: 3, name: "Mamun", age: 26 },
             ],
         });
     };
@@ -54,7 +54,23 @@ class App extends Component {
         if (this.state.showPersons) {
             persons = (
                 <div>
-                    <Person
+                    {this.state.persons.map((person, index) => {
+                        return (
+                            <Person
+                                name={person.name}
+                                age={person.age}
+                                key={person.id}
+                                click={this.switchNameHandler.bind(
+                                    this,
+                                    "Obydullah"
+                                )}
+                                changed={this.nameChangedHandler}
+                            >
+                                My Hobby is Sleeping
+                            </Person>
+                        );
+                    })}
+                    {/* <Person
                         name={this.state.persons[0].name}
                         age={this.state.persons[0].age}
                     ></Person>
@@ -69,7 +85,7 @@ class App extends Component {
                     <Person
                         name={this.state.persons[2].name}
                         age={this.state.persons[2].age}
-                    ></Person>
+                    ></Person> */}
                 </div>
             );
         }
