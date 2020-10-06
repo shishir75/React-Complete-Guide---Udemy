@@ -40,6 +40,12 @@ class App extends Component {
         this.setState({ showPersons: !doesShow });
     };
 
+    deletePersonHandler = (personIndex) => {
+        const persons = this.state.persons;
+        persons.splice(personIndex, 1);
+        this.setState({ persons: persons });
+    };
+
     render() {
         const style = {
             backgroundColor: "#eeeeee",
@@ -60,11 +66,10 @@ class App extends Component {
                                 name={person.name}
                                 age={person.age}
                                 key={person.id}
-                                click={this.switchNameHandler.bind(
+                                click={this.deletePersonHandler.bind(
                                     this,
-                                    "Obydullah"
+                                    index
                                 )}
-                                changed={this.nameChangedHandler}
                             >
                                 My Hobby is Sleeping
                             </Person>
