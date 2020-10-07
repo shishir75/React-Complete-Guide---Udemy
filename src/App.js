@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import Radium from "radium";
 import Person from "./Person/Person";
 
 class App extends Component {
@@ -66,6 +67,10 @@ class App extends Component {
             padding: "8px",
             cursor: "pointer",
             borderRadius: "5px",
+            ":hover": {
+                backgroundColor: "lightgreen",
+                color: "black",
+            },
         };
 
         let persons = null;
@@ -98,15 +103,15 @@ class App extends Component {
                         changed={this.nameChangedHandler}
                     >
                         My Hobby is Sleeping
-                    </Person>
-                    <Person
-                        name={this.state.persons[2].name}
-                        age={this.state.persons[2].age}
-                    ></Person> */}
+                    </Person> */}
                 </div>
             );
 
             style.backgroundColor = "red"; // change background color after clicking
+            style[":hover"] = {
+                backgroundColor: "salmon",
+                color: "black",
+            };
         }
 
         let classes = [];
@@ -130,4 +135,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Radium(App);
