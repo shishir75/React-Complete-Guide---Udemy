@@ -59,7 +59,8 @@ class App extends Component {
 
     render() {
         const style = {
-            backgroundColor: "#eeeeee",
+            backgroundColor: "green",
+            color: "white",
             font: "inherit",
             border: "1px solid blue",
             padding: "8px",
@@ -104,6 +105,8 @@ class App extends Component {
                     ></Person> */}
                 </div>
             );
+
+            style.backgroundColor = "red"; // change background color after clicking
         }
 
         return (
