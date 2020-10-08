@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import Radium, { StyleRoot } from "radium";
-import Person from "../components/Persons/Person/Person";
+import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
 
 class App extends Component {
     state = {
@@ -13,18 +14,6 @@ class App extends Component {
         otherState: "some other value",
         showPersons: false,
     };
-
-    // switchNameHandler = (newName) => {
-    //     // console.log("was clicked");
-    //     // this.state.persons[0].name = "Obydullah Sarder";  // DON"T DO THIS
-    //     this.setState({
-    //         persons: [
-    //             { id: 1, name: newName, age: 26 },
-    //             { id: 2, name: "Masuma", age: 18 },
-    //             { id: 3, name: "Mamun", age: 27 },
-    //         ],
-    //     });
-    // };
 
     nameChangedHandler = (event, id) => {
         const personIndex = this.state.persons.findIndex((p) => {
@@ -59,77 +48,25 @@ class App extends Component {
     };
 
     render() {
-        const style = {
-            backgroundColor: "green",
-            color: "white",
-            font: "inherit",
-            border: "1px solid blue",
-            padding: "8px",
-            cursor: "pointer",
-            borderRadius: "5px",
-            ":hover": {
-                backgroundColor: "lightgreen",
-                color: "black",
-            },
-        };
-
         let persons = null;
         if (this.state.showPersons) {
             persons = (
-                <div>
-                    {this.state.persons.map((person, index) => {
-                        return (
-                            <Person
-                                name={person.name}
-                                age={person.age}
-                                key={person.id}
-                                click={() => this.deletePersonHandler(index)}
-                                changed={(event) =>
-                                    this.nameChangedHandler(event, person.id)
-                                }
-                            >
-                                My Hobby is Sleeping
-                            </Person>
-                        );
-                    })}
-                    {/* <Person
-                        name={this.state.persons[0].name}
-                        age={this.state.persons[0].age}
-                    ></Person>
-                    <Person
-                        name={this.state.persons[1].name}
-                        age={this.state.persons[1].age}
-                        click={this.switchNameHandler.bind(this, "Obydullah")}
-                        changed={this.nameChangedHandler}
-                    >
-                        My Hobby is Sleeping
-                    </Person> */}
-                </div>
+                <Persons
+                    persons={this.state.persons}
+                    clicked={this.deletePersonHandler}
+                    changed={this.nameChangedHandler}
+                ></Persons>
             );
-
-            style.backgroundColor = "red"; // change background color after clicking
-            style[":hover"] = {
-                backgroundColor: "salmon",
-                color: "black",
-            };
-        }
-
-        let classes = [];
-        if (this.state.persons.length <= 2) {
-            classes.push("red"); // classes = ['red'];
-        }
-        if (this.state.persons.length <= 1) {
-            classes.push("bold"); // classes = ['red', 'bold'];
         }
 
         return (
             <StyleRoot>
                 <div className="App">
-                    <h1>Hi, I am react app</h1>
-                    <p className={classes.join(" ")}>Its really awesome...</p>
-                    <button style={style} onClick={this.togglePersonHandler}>
-                        Toggle Persons
-                    </button>
+                    <Cockpit
+                        persons={this.state.persons}
+                        showPersons={this.state.showPersons}
+                        clicked={this.togglePersonHandler}
+                    ></Cockpit>
                     {persons}
                 </div>
             </StyleRoot>
