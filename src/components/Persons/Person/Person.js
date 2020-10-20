@@ -3,7 +3,22 @@ import Radium from "radium";
 import "./Person.css";
 
 class Person extends Component {
+    constructor(props) {
+        super(props);
+        console.log("[Person.js] inside Constructor", props);
+    }
+
+    UNSAFE_componentWillMount() {
+        console.log("[Person.js] inside ComponentWillMount ");
+    }
+
+    componentDidMount() {
+        console.log("[Person.js] inside ComponentDidMount");
+    }
+
     render() {
+        console.log("[Person.js] inside render()");
+
         const style = {
             "@media(min-width: 500px)": {
                 width: "450px",

@@ -34,7 +34,7 @@ const Cockpit = (props) => {
     return (
         <div>
             <h1>Hi, I am react app</h1>
-            <p className={classes.join(" ")}>Its really awesome...</p>
+            <p className={classes.join(" ")}>{props.appTitle}</p>
             <button style={style} onClick={props.clicked}>
                 Toggle Persons
             </button>

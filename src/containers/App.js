@@ -5,6 +5,19 @@ import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        console.log("[App.js] inside Constructor", props);
+    }
+
+    UNSAFE_componentWillMount() {
+        console.log("[App.js] inside ComponentWillMount ");
+    }
+
+    componentDidMount() {
+        console.log("[App.js] inside ComponentDidMount");
+    }
+
     state = {
         persons: [
             { id: 1, name: "Shishir", age: 24 },
@@ -48,6 +61,7 @@ class App extends Component {
     };
 
     render() {
+        console.log("[App.js] inside render()");
         let persons = null;
         if (this.state.showPersons) {
             persons = (
@@ -66,6 +80,7 @@ class App extends Component {
                         persons={this.state.persons}
                         showPersons={this.state.showPersons}
                         clicked={this.togglePersonHandler}
+                        appTitle={this.props.title}
                     ></Cockpit>
                     {persons}
                 </div>
