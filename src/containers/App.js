@@ -60,6 +60,27 @@ class App extends Component {
         this.setState({ persons: persons });
     };
 
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log(
+            "[UPDATE App.js] inside shouldComponentUpdate",
+            nextProps,
+            nextState
+        );
+        return true;
+    }
+
+    UNSAFE_componentWillUpdate(nextProps, nextState) {
+        console.log(
+            "[UPDATE App.js] inside UNSAFE_componentWillUpdate",
+            nextProps,
+            nextState
+        );
+    }
+
+    componentDidUpdate() {
+        console.log("[UPDATE App.js] inside componentDidUpdate");
+    }
+
     render() {
         console.log("[App.js] inside render()");
         let persons = null;
